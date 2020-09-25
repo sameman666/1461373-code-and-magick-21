@@ -183,10 +183,7 @@
   var fireballSize = 22;
 
   var getFireballSpeed = function (isMovingLeft) {
-    if (isMovingLeft) {
-      return 2;
-    }
-      return 5;
+    return isMovingLeft ? 2 : 5;
   }
 
   var wizardWidth = 70;
@@ -205,6 +202,7 @@
     return gameFieldHeight / 3;
   }
 </script>
+<script src="js/stat.js"></script>
 <script src="js/game.js"></script>
 
 </body>
