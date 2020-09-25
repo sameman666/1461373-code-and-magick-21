@@ -29,6 +29,11 @@ const getMaxElement = function (elements) {
   return maxElement;
 };
 
+const getRandomInt = function (min, max) {
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+};
+
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, `rgba(0, 0, 0, 0.7)`);
   renderCloud(ctx, CLOUD_X, CLOUD_Y, `#fff`);
@@ -40,38 +45,35 @@ window.renderStatistics = function (ctx, names, times) {
 
   const maxTime = getMaxElement(times);
 
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
-
   const getRandomBlue = function () {
-    return `hsl(` + 233 + `,` + getRandomInt(0, 100) + `%,` + getRandomInt(0, 100) + `%)`;
+    return `hsl(233, ${getRandomInt(0, 100)}%, ${getRandomInt(0, 100)}%)`;
   };
 
   for (let i = 0; i < names.length; i++) {
-    const COLUMN_X = CLOUD_X + TITLE_X * 2 + (BAR_WIDTH + COLUMN_GAP) * i;
+    let columnX = CLOUD_X + TITLE_X * 2 + (BAR_WIDTH + COLUMN_GAP) * i;
+    let currentBarHeight = (BAR_HEIGHT * times[i]) / maxTime;
     ctx.fillStyle = `#000`;
     ctx.fillText(
         names[i],
-        COLUMN_X,
+        columnX,
         CLOUD_HEIGHT - GAP
     );
     ctx.fillText(
         Math.round(times[i]),
-        COLUMN_X,
-        CLOUD_HEIGHT - GAP * 2 - TEXT_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime
+        columnX,
+        CLOUD_HEIGHT - GAP * 2 - TEXT_HEIGHT - currentBarHeight
     );
     if (names[i] === `Вы`) {
       ctx.fillStyle = `hsl(0, 100%, 50%)`;
     } else {
       ctx.fillStyle = getRandomBlue();
     }
+    ctx.fillStyle = names[i] === `Вы` ? `hsl(0, 100%, 50%)` : getRandomBlue();
     ctx.fillRect(
-        COLUMN_X,
-        CLOUD_HEIGHT - GAP - TEXT_HEIGHT, BAR_WIDTH,
-        -(BAR_HEIGHT * times[i]) / maxTime
+        columnX,
+        CLOUD_HEIGHT - GAP - TEXT_HEIGHT,
+        BAR_WIDTH,
+        -currentBarHeight
     );
   }
 };
