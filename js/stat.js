@@ -12,12 +12,12 @@ const BAR_WIDTH = 40;
 const BAR_HEIGHT = 150;
 const COLUMN_GAP = 50;
 
-const renderCloud = function (ctx, x, y, color) {
+const renderCloud = (ctx, x, y, color) => {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-const getMaxElement = function (elements) {
+const getMaxElement = (elements) => {
   let maxElement = elements[0];
 
   for (let i = 1; i < elements.length; i++) {
@@ -29,12 +29,12 @@ const getMaxElement = function (elements) {
   return maxElement;
 };
 
-const getRandomInt = function (min, max) {
-  let rand = min + Math.random() * (max + 1 - min);
+const getRandomInt = (min, max) => {
+  const rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
 };
 
-window.renderStatistics = function (ctx, names, times) {
+window.renderStatistics = (ctx, names, times) => {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, `rgba(0, 0, 0, 0.7)`);
   renderCloud(ctx, CLOUD_X, CLOUD_Y, `#fff`);
 
@@ -45,13 +45,13 @@ window.renderStatistics = function (ctx, names, times) {
 
   const maxTime = getMaxElement(times);
 
-  const getRandomBlue = function () {
+  const getRandomBlue = () => {
     return `hsl(233, ${getRandomInt(0, 100)}%, ${getRandomInt(0, 100)}%)`;
   };
 
   for (let i = 0; i < names.length; i++) {
-    let columnX = CLOUD_X + TITLE_X * 2 + (BAR_WIDTH + COLUMN_GAP) * i;
-    let currentBarHeight = (BAR_HEIGHT * times[i]) / maxTime;
+    const columnX = CLOUD_X + TITLE_X * 2 + (BAR_WIDTH + COLUMN_GAP) * i;
+    const currentBarHeight = (BAR_HEIGHT * times[i]) / maxTime;
     ctx.fillStyle = `#000`;
     ctx.fillText(
         names[i],
@@ -63,11 +63,6 @@ window.renderStatistics = function (ctx, names, times) {
         columnX,
         CLOUD_HEIGHT - GAP * 2 - TEXT_HEIGHT - currentBarHeight
     );
-    if (names[i] === `Вы`) {
-      ctx.fillStyle = `hsl(0, 100%, 50%)`;
-    } else {
-      ctx.fillStyle = getRandomBlue();
-    }
     ctx.fillStyle = names[i] === `Вы` ? `hsl(0, 100%, 50%)` : getRandomBlue();
     ctx.fillRect(
         columnX,
