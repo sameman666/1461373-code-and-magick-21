@@ -15,6 +15,11 @@ const surnames = [`да Марья`, `Верон`, `Мирабелла`, `Вал
 const coatColors = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`, `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
 const eyesColors = [`black`, `red`, `blue`, `yellow`, `green`];
 
+const getRandomInt = (min, max) => {
+  const rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+};
+
 const getWizard = () => {
   for (let i = 0; i < 4; i++) {
     WIZARDS.push(
