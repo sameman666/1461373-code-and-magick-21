@@ -16,10 +16,10 @@ const SURNAMES = [`да Марья`, `Верон`, `Мирабелла`, `Вал
 const COAT_COLORS = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`, `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
 const EYES_COLORS = [`black`, `red`, `blue`, `yellow`, `green`];
 
-// const getRandomInt = (min, max) => {
-//   const rand = min + Math.random() * (max + 1 - min);
-//   return Math.floor(rand);
-// };
+const getRandomInt = (min, max) => {
+  const rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+};
 
 const getRandomData = (array) => {
   return array[getRandomInt(0, array.length - 1)];
