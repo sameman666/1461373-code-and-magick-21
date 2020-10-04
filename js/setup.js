@@ -20,9 +20,9 @@ const getRandomData = (data) => {
 };
 
 const getWizard = (count) => {
-  const WIZARDS = [];
+  const wizards = [];
   for (let i = 0; i < count; i++) {
-    WIZARDS.push(
+    wizards.push(
         {
           name: `${getRandomData(NAMES)} ${getRandomData(SURNAMES)}`,
           coatColor: `${getRandomData(COAT_COLORS)}`,
@@ -30,7 +30,7 @@ const getWizard = (count) => {
         }
     );
   }
-  return WIZARDS;
+  return wizards;
 };
 
 const renderWizard = (data) => {
